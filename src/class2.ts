@@ -15,14 +15,14 @@ class Dog2 extends Animal{
     super()
     this.name = name
   }
-  name:string
+  name:string;
   run(){}
   sleep(){
     console.log('dog sleep');
   }
 }
 
-let dog2 = new Dog2('wangwang')
+let dog2 = new Dog2('wangwang');
 console.log(dog2);
 
 
