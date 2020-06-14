@@ -270,78 +270,91 @@
 //     console.log(area({kind:'circle',r:1}))
 // }
 
-interface DogInterface {
-    run(): void
+{
+	interface DogInterface {
+		run(): void
+	}
+
+	interface CatInterface {
+		jump(): void
+	}
+
+	const pet: DogInterface & CatInterface = {
+		run() {
+		},
+		jump() {
+		}
+	}; // 交叉类型
+
+
+	const a: number | string = 'a';
+	// tslint:disable-next-line:prefer-const
+	let b: 'a' | 'b' | 'c';
+	let c: 1 | 2 | 3;
+
+	class Dog implements DogInterface {
+		public run() {
+		}
+
+		public eat() {
+		}
+	}
+
+	class Cat implements CatInterface {
+		public jump() {
+		}
+
+		public eat() {
+		}
+	}
+
+	enum Master {
+		Boy,
+		Girl
+	}
+
+	function getPet(master: Master) {
+		const pet = master === Master.Boy ? new Dog() : new Cat();
+		// 如果一个对象是联合类型,在类型未确定的情况下,只能访问所有类型的共有成员
+		pet.eat();
+		return pet;
+	}
+
+	interface Square {
+		kind: "square";
+		size: number
+	}
+
+	interface Rectangle {
+		kind: "rectangle";
+		width: number;
+		height: number
+	}
+
+	type Shape = Square | Rectangle | Circle
+
+	interface Circle {
+		kind: 'circle',
+		r: number
+	}
+
+	function area(s: Shape): number | never {
+		switch (s.kind) {
+			case 'square':
+				return s.size * s.size;
+			case 'rectangle':
+				return s.height * s.width;
+			case 'circle':
+				return Math.PI * s.r ** 2;
+			default:
+				return ((e: never) => {
+					throw new Error(e)
+				})(s) // 检查s是不是never类型
+		}
+	}
+
+	console.log(area({
+		kind: 'circle',
+		r: 1
+	}))
 }
-
-interface CatInterface {
-    jump(): void
-}
-
-let pet: DogInterface & CatInterface = {
-    run() {},
-    jump() {}
-} //交叉类型
-
-
-let a: number | string = 'a'
-let b: 'a' | 'b' | 'c'
-let c: 1 | 2 | 3
-class Dog implements DogInterface {
-    run() {}
-    eat() {}
-}
-
-class Cat implements CatInterface {
-    jump() {}
-    eat() {}
-}
-
-enum Master {
-    Boy,
-    Girl
-}
-
-function getPet(master: Master) {
-    let pet = master === Master.Boy ? new Dog() : new Cat();
-    //如果一个对象是联合类型,在类型未确定的情况下,只能访问所有类型的共有成员
-    pet.eat() 
-    return pet;
-}
-
-interface Square {
-    kind: "square";
-    size: number
-}
-
-interface Rectangle {
-    kind: "rectangle";
-    width: number;
-    height: number
-}
-
-type Shape = Square | Rectangle | Circle
-interface Circle {
-    kind: 'circle',
-        r: number
-}
-
-function area(s: Shape): number | never {
-    switch (s.kind) {
-        case 'square':
-            return s.size * s.size
-        case 'rectangle':
-            return s.height * s.width
-        case 'circle':
-            return Math.PI * s.r ** 2;
-        default:
-            return ((e: never) => {
-                throw new Error(e)
-            })(s) //检查s是不是never类型
-    }
-}
-
-console.log(area({
-    kind: 'circle',
-    r: 1
-}))
