@@ -3,7 +3,7 @@
     a: 1,
     b: 2,
     c: 3
-  }
+  };
 
   function getValues<T,K extends keyof T>(obj:T,keys: K[]):T[K][]{
     return keys.map(key=>obj[key])
@@ -20,9 +20,9 @@ interface obj{
   b:string
 }
 
-let key: keyof obj
+let key: keyof obj;
 
 // T[k]
-let value: obj['a']
+let value: obj['a'];
 
 //T extends U
