@@ -10,8 +10,8 @@ class Dog{
   public name:string; //默认是public,可以显示声明
   private age?:number; //私有成员,只能在类的内部调用,不可以在实例和子类中调用
   protected pro(){} //受保护成员只能在类和子类中访问,不可以在实例中访问
-  readonly legs: number =4 //只读属性不可以被更改,必须要初始化
-  static food:string = 'boned' //静态成员,只能通过类名访问.可以被继承
+  readonly legs: number =4; //只读属性不可以被更改,必须要初始化
+  static food:string = 'boned'; //静态成员,只能通过类名访问.可以被继承
   run(){}
 }
 console.log(Dog.prototype);//Dog { run: [Function] }

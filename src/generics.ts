@@ -53,3 +53,19 @@ function log1<T extends Length>(value:T):T{
 log1([1])
 log1('123')
 log1({length:1});
+
+type Test = {
+  func1:()=>{
+    return '123'
+  };
+  func2():string
+}
+
+const DD as Test = {
+  func1:()=>{
+
+  },
+  func2:()=>{
+    return '123'
+  }
+}
